@@ -8,7 +8,8 @@ public class BallController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.velocity = transform.rotation*Vector2.right*GameManager.BallSpeed;
+        GameManager.BallSpeed = 2f;
+        rb2d.velocity = Quaternion.Euler(0,0,27f)*Vector2.right*GameManager.BallSpeed;
     }
 
     // Update is called once per frame
