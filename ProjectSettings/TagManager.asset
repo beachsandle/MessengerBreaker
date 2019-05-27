@@ -46,3 +46,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 2073794961
+    locked: 0
+  - name: Ball
+    uniqueID: 1727373689
+    locked: 0
+  - name: Block
+    uniqueID: 3126181879
+    locked: 0
+  - name: UI
+    uniqueID: 4005307683
+    locked: 0

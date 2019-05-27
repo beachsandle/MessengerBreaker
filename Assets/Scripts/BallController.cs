@@ -5,11 +5,12 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
+    public float Speed=5f;
+    public float Angle = 30f;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        GameManager.BallSpeed = 2f;
-        rb2d.velocity = Quaternion.Euler(0,0,27f)*Vector2.right*GameManager.BallSpeed;
+        rb2d.velocity = Quaternion.Euler(0,0,Angle)*Vector2.right*Speed;
     }
 
     // Update is called once per frame
