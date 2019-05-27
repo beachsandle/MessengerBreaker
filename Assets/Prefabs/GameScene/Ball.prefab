@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3908414670436661682}
   - component: {fileID: 6293982688147043825}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 3631384663637948405}
   - component: {fileID: 7439868182794815380}
   - component: {fileID: 5371422316379160962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,10 +195,10 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 8ae8a97108eb3a7449c225084a5e6153, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5371422316379160962
 MonoBehaviour:
   m_ObjectHideFlags: 0

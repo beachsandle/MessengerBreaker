@@ -14,7 +14,14 @@ public class BallController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
+    {
+        if (rb2d.velocity.x == 0 || rb2d.velocity.y == 0)
+            rb2d.velocity = Quaternion.Euler(0, 0, Angle) * Vector2.right * Speed;
+        if (rb2d.velocity.magnitude <= Speed * 2 / 3)
+            rb2d.velocity = rb2d.velocity.normalized * Speed;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
     {
         
     }

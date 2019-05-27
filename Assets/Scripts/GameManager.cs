@@ -7,6 +7,12 @@ public class GameManager
     private static GameManager instance;
     private static bool DataLoad()
     {
+        instance = new GameManager();
+        instance.ballSpeed = 8f;
+        instance.barWidth = 2f;
+        instance.divadeChance = 0f;
+        instance.attack = 1;
+        instance.limitBallCount = 1;
         return true;
     }
     private static bool DataSave()
@@ -24,14 +30,15 @@ public class GameManager
         get
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             return instance.ballSpeed;
         }
         set
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             instance.ballSpeed = value;
+            DataSave();
         }
     }
     public static float BarWidth
@@ -39,14 +46,15 @@ public class GameManager
         get
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             return instance.barWidth;
         }
         set
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             instance.barWidth = value;
+            DataSave();
         }
     }
     public static float DivideChance
@@ -54,14 +62,15 @@ public class GameManager
         get
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             return instance.divadeChance;
         }
         set
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             instance.divadeChance = value;
+            DataSave();
         }
     }
     public static int LimitBallCount
@@ -69,14 +78,15 @@ public class GameManager
         get
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             return instance.limitBallCount;
         }
         set
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             instance.limitBallCount = value;
+            DataSave();
         }
     }
     public static int Attack
@@ -84,7 +94,7 @@ public class GameManager
         get
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             return instance.attack;
         }
         set
@@ -92,6 +102,7 @@ public class GameManager
             if (instance == null)
                 instance = new GameManager();
             instance.attack = value;
+            DataSave();
         }
     }
     private GameManager() { }
