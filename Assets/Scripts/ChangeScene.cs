@@ -20,6 +20,11 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void ChangeUpgradeScene()
+    {
+        SceneManager.LoadScene("UpgradeScene");
+    }
+
     public void Exit()
     {
 #if UNITY_EDITOR
