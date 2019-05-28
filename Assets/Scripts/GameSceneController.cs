@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 public class GameSceneController : MonoBehaviour
 {
     //상수
-    private readonly float Y_ZERO = 3.375f;
+    private readonly float Y_ZERO = 4.125f;
     private readonly float X_ZERO = -2.625f;
     private readonly float BLOCK_LENGTH = 0.75f;
     private readonly int LEVEL_LENGTH = 4;
@@ -26,6 +27,8 @@ public class GameSceneController : MonoBehaviour
     //외부 변수
     public int StageLevel=1;
     public int BlockHP = 1;
+    public Text LevelText;
+    public Text ScoreText;
     public GameObject Ball;
     public GameObject[] Blocks;
     //
@@ -50,11 +53,14 @@ public class GameSceneController : MonoBehaviour
         StartAngle = Random.Range(20f, 160f);
         SpanBall(StartPosition, StartAngle);
         for(int row=0;row< START_LINE; row++)
-            SpanBlockLine();
+            SpanBlockLine(0.01f);
+        LevelText.text = " Level : 1";
+        ScoreText.text = " Score : 0";
     }
     void FixedUpdate()
     {
-        RespanBlockLine();
+        if (gameBoard[START_LINE - 1].Count <= 2)
+            RespanBlockLine();
     }
     //
     //내부 함수
@@ -76,39 +82,45 @@ public class GameSceneController : MonoBehaviour
         controller.controller = this;
         gameBoard[0].Add(block);
     }
-    private void Pushballs()
+    private IEnumerator CoPushBlockLine(List<GameObject> line,float fallingTime)
     {
-        balls.ForEach(ball => {
-            if (ball.transform.position.y>= -1.8)
-                ball.transform.position = ball.transform.position + Vector3.down * BLOCK_LENGTH;
-        });
+        var downtime = 0f;
+        var movement = Vector3.down * BLOCK_LENGTH / fallingTime;
+        while (true)
+        {
+            line.ForEach(block => block.transform.Translate( movement * Time.deltaTime));
+            downtime += Time.deltaTime;
+            if (downtime > fallingTime)
+            {
+                line.ForEach(block => block.transform.Translate(movement * (fallingTime- downtime)));
+                break;
+            }
+            yield return null;
+        }
     }
-    private void PushBlockLine()
+    private void PushBlockLine(float fallingTime)
     {
         foreach (var line in gameBoard)
-            foreach (var block in line)
-                block.transform.position = block.transform.position + Vector3.down * BLOCK_LENGTH;
+            StartCoroutine(CoPushBlockLine(line, fallingTime));
     }
-    private void SpanBlockLine()
+    private void SpanBlockLine(float fallingTime=0.2f)
     {
-        //Pushballs();
-        PushBlockLine();
         gameBoard.Insert(0,new List<GameObject>());
         for (int col = 0; col < COLUMNS; col++)
             SpanBlock(col);
+        PushBlockLine(fallingTime);
     }
     private void RespanBlockLine()
     {
-        if (gameBoard[START_LINE-1].Count <= 2)
+
+        SpanBlockLine();
+        --lineCount;
+        if (lineCount == 0)
         {
-            SpanBlockLine();
-            --lineCount;
-            if (lineCount == 0)
-            {
-                ++StageLevel;
-                BlockHP = StageLevel;
-                lineCount = LEVEL_LENGTH;
-            }
+            ++StageLevel;
+            BlockHP = StageLevel;
+            lineCount = LEVEL_LENGTH;
+            LevelText.text = $" Level : {StageLevel.ToString()}";
         }
     }
     //
@@ -121,6 +133,7 @@ public class GameSceneController : MonoBehaviour
     public void BlockDestroy(GameObject block)
     {
         score += block.GetComponent<BlockController>().MaxHP * 100;
+        ScoreText.text = $" Score : {score.ToString()}";
         gameBoard.ForEach(list=>list.Remove(block));
         gameBoard.RemoveAll(list => list.Count == 0);
         Destroy(block);

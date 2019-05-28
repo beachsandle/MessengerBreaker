@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7542423326320514811}
   - component: {fileID: 7542423326320514809}
   - component: {fileID: 6303677028963067688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: KakaotalkBlock
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9ed87d9b110a146a4eefc0b7fe26a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   MaxHP: 1
   HP: 1
-  GameBoard: {fileID: 8560210356351066123, guid: 051a676252156b348b546ae2cae9d05c,
-    type: 3}

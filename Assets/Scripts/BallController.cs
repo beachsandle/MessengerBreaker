@@ -37,7 +37,7 @@ public class BallController : MonoBehaviour
     {
         if (transform.position.y < collision.collider.bounds.center.y)
             return;
-        var xdist = -transform.position.x+ collision.collider.bounds.center.x;
+        var xdist = Mathf.Abs(-transform.position.x+ collision.collider.bounds.center.x);
         bentAngle = 30f*xdist / collision.collider.bounds.extents.x;
     }
     private void OnCollisionExit2D(Collision2D collision)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1057880150}
   - component: {fileID: 1057880149}
   - component: {fileID: 1057880148}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WallCollider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 0.16666667, y: 0.13333334, z: 1}
   m_Children: []
   m_Father: {fileID: 8560210356351066121}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1057880150
 BoxCollider2D:
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.5, y: 0}
+  m_Offset: {x: -3.5, y: -0.125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 7.5}
+  m_Size: {x: 1, y: 7.75}
   m_EdgeRadius: 0
 --- !u!61 &1057880149
 BoxCollider2D:
@@ -72,7 +72,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.5, y: 0}
+  m_Offset: {x: 3.5, y: -0.125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -83,7 +83,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 7.5}
+  m_Size: {x: 1, y: 7.75}
   m_EdgeRadius: 0
 --- !u!61 &1057880148
 BoxCollider2D:
@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1491166589}
   - component: {fileID: 1491166590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BottomCollider
   m_TagString: Bottom
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ Transform:
   m_LocalScale: {x: 0.16666667, y: 0.13333334, z: 1}
   m_Children: []
   m_Father: {fileID: 8560210356351066121}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1491166590
 BoxCollider2D:
@@ -155,7 +155,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -4.25}
+  m_Offset: {x: 0, y: -4.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 8560210356351066121}
   - component: {fileID: 8560210356351066122}
   - component: {fileID: 24245960}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameBoard
   m_TagString: GameController
   m_Icon: {fileID: 0}
@@ -197,8 +197,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6, y: 7.5, z: 1}
   m_Children:
-  - {fileID: 1491166589}
   - {fileID: 1057880147}
+  - {fileID: 1491166589}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769673e6f1e1e194086d0ad6c13e2223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TEST_BallSpeed: 10
+  score: 0
   StageLevel: 1
   BlockHP: 1
   Ball: {fileID: 8474981876563352539, guid: 9dda715318009af42b1b373bc2ce6f83, type: 3}
