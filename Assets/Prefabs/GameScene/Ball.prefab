@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3c2555cef3490f0489824a28a89a7805, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -213,5 +213,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   Angle: 27
-  GameBoard: {fileID: 8560210356351066123, guid: 051a676252156b348b546ae2cae9d05c,
-    type: 3}
+  controller: {fileID: 0}

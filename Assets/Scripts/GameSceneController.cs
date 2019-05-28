@@ -55,7 +55,7 @@ public class GameSceneController : MonoBehaviour
         for(int row=0;row< START_LINE; row++)
             SpanBlockLine(0.01f);
         LevelText.text = " Level : 1";
-        ScoreText.text = " Score : 0";
+        ScoreText.text = "Score : 0";
     }
     void FixedUpdate()
     {
@@ -133,7 +133,7 @@ public class GameSceneController : MonoBehaviour
     public void BlockDestroy(GameObject block)
     {
         score += block.GetComponent<BlockController>().MaxHP * 100;
-        ScoreText.text = $" Score : {score.ToString()}";
+        ScoreText.text = $"Score : {score.ToString()}";
         gameBoard.ForEach(list=>list.Remove(block));
         gameBoard.RemoveAll(list => list.Count == 0);
         Destroy(block);

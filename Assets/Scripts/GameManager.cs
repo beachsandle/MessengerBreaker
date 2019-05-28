@@ -10,7 +10,7 @@ public class GameManager
         instance = new GameManager();
         instance.ballSpeed = 8f;
         instance.barWidth = 2f;
-        instance.divadeChance = 0f;
+        instance.divadeChance = 50f;
         instance.attack = 1;
         instance.limitBallCount = 1;
         return true;

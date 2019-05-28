@@ -35,17 +35,18 @@ public class BallController : MonoBehaviour
 
     private void SetBentAngle(Collision2D collision)
     {
-        if (transform.position.y < collision.collider.bounds.center.y)
-            return;
-        var xdist = Mathf.Abs(-transform.position.x+ collision.collider.bounds.center.x);
+        
+        var xdist = (-transform.position.x+ collision.collider.bounds.center.x);
         bentAngle = 30f*xdist / collision.collider.bounds.extents.x;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (transform.position.y < collision.collider.bounds.center.y)
+                return;
             SetBentAngle(collision);
-        }
+        } else
         if (collision.gameObject.CompareTag("Bottom"))
         {
             controller.BallDestroy(gameObject);
