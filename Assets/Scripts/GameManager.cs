@@ -100,7 +100,7 @@ public class GameManager
         set
         {
             if (instance == null)
-                instance = new GameManager();
+                DataLoad();
             instance.attack = value;
             DataSave();
         }

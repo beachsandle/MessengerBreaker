@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\BlockController.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameSceneController.cs" />
+    <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/ㅇㅅㅇ/Desktop/MessengerBreaker/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
