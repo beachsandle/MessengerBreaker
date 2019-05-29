@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public enum BLOCK_TYPE { KAKAO, LINE, FEBOOK, SLACK }
 
-
 public class GameSceneController : MonoBehaviour
 {
     //상수
