@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -325,7 +325,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -289659613
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e1ebaba28fcf80c4dabd3ed2986f3b14, type: 3}
   m_Color: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
@@ -404,7 +404,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -289659613
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e1ebaba28fcf80c4dabd3ed2986f3b14, type: 3}
   m_Color: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
@@ -809,5 +809,19 @@ PrefabInstance:
       propertyPath: MainCamera
       value: 
       objectReference: {fileID: 534669904}
+    - target: {fileID: 24245960, guid: 051a676252156b348b546ae2cae9d05c, type: 3}
+      propertyPath: AttackItem
+      value: 
+      objectReference: {fileID: 3109181589206572844, guid: 9373cc3d17445ee4898bff08d5c56a75,
+        type: 3}
+    - target: {fileID: 24245960, guid: 051a676252156b348b546ae2cae9d05c, type: 3}
+      propertyPath: BallItem
+      value: 
+      objectReference: {fileID: 4916558392071490111, guid: 31e65aa0f2eb13442a10b7aa765612d5,
+        type: 3}
+    - target: {fileID: 24245960, guid: 051a676252156b348b546ae2cae9d05c, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1617099258}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 051a676252156b348b546ae2cae9d05c, type: 3}

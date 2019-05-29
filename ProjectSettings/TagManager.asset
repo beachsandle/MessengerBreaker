@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Bottom
   - Controller
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -54,6 +55,9 @@ TagManager:
     locked: 0
   - name: Block
     uniqueID: 3126181879
+    locked: 0
+  - name: Item
+    uniqueID: 4291780151
     locked: 0
   - name: UI
     uniqueID: 4005307683
