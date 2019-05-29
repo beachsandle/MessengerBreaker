@@ -262,11 +262,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769673e6f1e1e194086d0ad6c13e2223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   StageLevel: 1
   BlockHP: 1
+  LevelText: {fileID: 0}
+  ScoreText: {fileID: 0}
+  MainCamera: {fileID: 0}
   Ball: {fileID: 8474981876563352539, guid: 9dda715318009af42b1b373bc2ce6f83, type: 3}
-  Blocks:
-  - {fileID: 7542423326320514812, guid: 041495a70a417c748aacd248c20f3a46, type: 3}
-  - {fileID: 3307412945970325850, guid: 0f0b631943a6d3145859482c04cc457d, type: 3}
-  - {fileID: 5283288806132896734, guid: 5eef545900274b1428fb7b65809f68a9, type: 3}
+  KakaoBlock: {fileID: 7542423326320514812, guid: 041495a70a417c748aacd248c20f3a46,
+    type: 3}
+  LineBlock: {fileID: 3307412945970325850, guid: 0f0b631943a6d3145859482c04cc457d,
+    type: 3}
+  FacebookBlock: {fileID: 2333185827139357270, guid: ca959cca6b632194cb7eea7c2628754e,
+    type: 3}
+  SlackBlock: {fileID: 5283288806132896734, guid: 5eef545900274b1428fb7b65809f68a9,
+    type: 3}

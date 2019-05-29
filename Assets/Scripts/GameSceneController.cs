@@ -1,127 +1,154 @@
 ﻿using System.Linq;
 using System.Collections;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+
+public enum BLOCK_TYPE { KAKAO, LINE, FEBOOK, SLACK }
+
+
 public class GameSceneController : MonoBehaviour
 {
     //상수
-    private readonly float Y_ZERO = 4.125f;
+    private readonly float Y_ZERO = 3.375f;
     private readonly float X_ZERO = -2.625f;
-    private readonly float BLOCK_LENGTH = 0.75f;
+    private readonly float BLOCK_SIZE = 0.75f;
+    private readonly float FALLING_TIME = 0.2f;
+    private readonly float DROP_DELAY = 0.2f;
     private readonly int LEVEL_LENGTH = 4;
     private readonly int COLUMNS = 8;
     private readonly int START_LINE = 3;
+    private readonly int LINE_BLOCK_COUNT = 1;
+    private readonly int FEBOOK_BLOCK_COUNT = 2;
     //
     //내부 변수
     private List<GameObject> balls = new List<GameObject>();
-    private List<List<GameObject>> gameBoard=new List<List<GameObject>>();
-    private GameObject blockBox;
+    private List<GameObject[]> blockLines = new List<GameObject[]>();
+    private GameObject[] Blocks;
+    private GameObject blockContainner;
     private int lineCount;
-    [ReadOnly]
-    public int score = 0;
+    private int score = 0;
+    private int StageLevel = 1;
     //
     //외부 변수
-    public int StageLevel=1;
-    public int BlockHP = 1;
     public Text LevelText;
     public Text ScoreText;
+    public Camera MainCamera;
     public GameObject Ball;
-    public GameObject[] Blocks;
+    public GameObject KakaoBlock;
+    public GameObject LineBlock;
+    public GameObject FacebookBlock;
+    public GameObject SlackBlock;
     //
     //내부 속성
-    private int RandomBlockIndex
-    {
-        get
-        {
-            return Random.Range(0, Blocks.Length);
-        }
-    }
     //
     //behaviour
     void Start()
     {
-        blockBox = new GameObject();
-        blockBox.name = "blockBox";
+        MainCamera.orthographicSize = 3f / ((float)Screen.width / Screen.height);
+        Blocks = new GameObject[4] { KakaoBlock, LineBlock, FacebookBlock, SlackBlock };
+        blockContainner = new GameObject();
+        blockContainner.name = "blockContainner";
         lineCount = LEVEL_LENGTH;
-        var StartPosition = Vector3.zero;
-        var StartAngle = Random.Range(15f, 75f)+90*Random.Range(0,2);
-        SpanBall(StartPosition, StartAngle);
-        StartAngle = Random.Range(20f, 160f);
-        SpanBall(StartPosition, StartAngle);
-        for(int row=0;row< START_LINE; row++)
-            SpanBlockLine(0.01f);
+        SpanBall(Random.Range(15f, 175f));
+        StartBlockLine();
         LevelText.text = " Level : 1";
         ScoreText.text = "Score : 0";
     }
-    void FixedUpdate()
-    {
-        if (gameBoard[START_LINE - 1].Count <= 2)
-            RespanBlockLine();
-    }
     //
     //내부 함수
-    private void SpanBall(Vector3 position,float angle)
+    private void SpanBall(float angle,Vector3? position= null)
     {
-        var ball = Instantiate(Ball, position, Quaternion.Euler(0,0,0));
+        var ball = Instantiate(Ball, position ?? new Vector3(0, -2, 0), Quaternion.Euler(0, 0, 0));
         var controller = ball.GetComponent<BallController>();
         controller.Angle = angle;
         controller.Speed = GameManager.BallSpeed;
         controller.controller = this;
         balls.Add(ball);
     }
-    private void SpanBlock(int x)
+    private void SpanBlock(int x, int y, bool effect, BLOCK_TYPE btype = BLOCK_TYPE.KAKAO)
+    // x,y에 btype 블럭 생성
     {
-        var spanPos = new Vector3(X_ZERO + BLOCK_LENGTH * x, Y_ZERO , 0);
-        var block = Instantiate(Blocks[RandomBlockIndex], spanPos, Quaternion.Euler(0, 0, 0) , blockBox.transform);
+        int spanRow = effect ? y - 1 : y;
+        var spanPos = new Vector3(X_ZERO + x * BLOCK_SIZE, Y_ZERO - spanRow * BLOCK_SIZE, 0);
+        var block = Instantiate(Blocks[(int)btype], spanPos, Quaternion.Euler(0, 0, 0), blockContainner.transform);
         var controller = block.GetComponent<BlockController>();
-        controller.MaxHP = BlockHP;
+        controller.Level = StageLevel;
         controller.controller = this;
-        gameBoard[0].Add(block);
+        controller.bType = btype;
+        blockLines[y][x] = block;
     }
-    private IEnumerator CoPushBlockLine(List<GameObject> line,float fallingTime)
+    private IEnumerator CoPushBlockLine(GameObject[] line)
+    //[coroutine]line을 FALLING_TIME에 걸쳐 BLOCK_SIZE만큼 하강
     {
+        yield return new WaitForSeconds(DROP_DELAY);
         var downtime = 0f;
-        var movement = Vector3.down * BLOCK_LENGTH / fallingTime;
+        var movement = Vector3.down * BLOCK_SIZE / FALLING_TIME;
         while (true)
         {
-            line.ForEach(block => block.transform.Translate( movement * Time.deltaTime));
+             line.Meet(block => block != null).ToList().ForEach(block => block.transform.Translate(movement * Time.deltaTime));
             downtime += Time.deltaTime;
-            if (downtime > fallingTime)
+            if (downtime > FALLING_TIME)
             {
-                line.ForEach(block => block.transform.Translate(movement * (fallingTime- downtime)));
+                line.Meet(block => block != null).ToList().ForEach(block => block.transform.Translate(movement * (FALLING_TIME - downtime)));
                 break;
             }
             yield return null;
         }
     }
-    private void PushBlockLine(float fallingTime)
+    private void PushBlockLine()
+    //blockLines의 모든 라인을 하강
     {
-        foreach (var line in gameBoard)
-            StartCoroutine(CoPushBlockLine(line, fallingTime));
+        foreach (var line in blockLines)
+            StartCoroutine(CoPushBlockLine(line));
     }
-    private void SpanBlockLine(float fallingTime=0.2f)
+
+    private void SpanBlockLine(int y = 0, bool special = false, bool effect = true)
+    //y행에 블럭라인 생성
     {
-        gameBoard.Insert(0,new List<GameObject>());
-        for (int col = 0; col < COLUMNS; col++)
-            SpanBlock(col);
-        PushBlockLine(fallingTime);
+        var columns = Enumerable.Range(0, COLUMNS).ToList().Shuffle();
+        blockLines.Insert(y, new GameObject[8]);
+        for (int x = 0; x < LINE_BLOCK_COUNT; x++)
+        {
+            SpanBlock(columns[0], y, effect, BLOCK_TYPE.LINE);
+            columns.RemoveAt(0);
+        }
+        for (int x = 0; x < FEBOOK_BLOCK_COUNT; x++) { 
+            SpanBlock(columns[0], y, effect,BLOCK_TYPE.FEBOOK);
+            columns.RemoveAt(0);
+        }
+        if (special)
+        {
+            SpanBlock(columns[0], y, effect, BLOCK_TYPE.SLACK);
+            columns.RemoveAt(0);
+        }
+        while (columns.Count != 0)
+        {
+            SpanBlock(columns[0], y, effect);
+            columns.RemoveAt(0);
+        }
+        if (effect)
+            PushBlockLine();
+    }
+    private void StartBlockLine()
+    {
+        SpanBlockLine(0, true, false);
+        for(int i=1;i<START_LINE;++i)
+            SpanBlockLine(i, false, false);
     }
     private void RespanBlockLine()
     {
-
-        SpanBlockLine();
         --lineCount;
         if (lineCount == 0)
         {
             ++StageLevel;
-            BlockHP = StageLevel;
             lineCount = LEVEL_LENGTH;
             LevelText.text = $" Level : {StageLevel.ToString()}";
+            SpanBlockLine(0,true);
         }
+        else
+            SpanBlockLine(0);
     }
     //
     //외부 함수
@@ -130,13 +157,29 @@ public class GameSceneController : MonoBehaviour
         balls.Remove(ball);
         Destroy(ball);
     }
-    public void BlockDestroy(GameObject block)
+    public void BlockDestroy(BlockController blockController)
     {
-        score += block.GetComponent<BlockController>().MaxHP * 100;
+        score += blockController.Level * 100;
+        switch(blockController.bType)
+        {
+            case BLOCK_TYPE.LINE:
+                RespanBlockLine();
+                break;
+
+            case BLOCK_TYPE.FEBOOK:
+                score += blockController.Level * 100;
+                break;
+
+            case BLOCK_TYPE.SLACK:
+                if(Random.Range(0,100)>=50)
+                    GameManager.Attack++;
+                else
+                    SpanBall(Random.Range(15f, 175f));
+                break;
+        }
         ScoreText.text = $"Score : {score.ToString()}";
-        gameBoard.ForEach(list=>list.Remove(block));
-        gameBoard.RemoveAll(list => list.Count == 0);
-        Destroy(block);
+        blockLines.RemoveAll(line => line.CountIf(element => element != null) == 0);
+        Destroy(blockController.gameObject);
     }
     //
 }

@@ -346,8 +346,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639260556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.375, z: 0}
-  m_LocalScale: {x: 6, y: 1.25, z: 1}
+  m_LocalPosition: {x: 0, y: 4.898, z: 0}
+  m_LocalScale: {x: 6, y: 2.294215, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -425,8 +425,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359122949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.375, z: 0}
-  m_LocalScale: {x: 6, y: 1.25, z: 1}
+  m_LocalPosition: {x: 0, y: -4.902, z: 0}
+  m_LocalScale: {x: 6, y: 2.30375, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -805,5 +805,9 @@ PrefabInstance:
       propertyPath: ScoreText
       value: 
       objectReference: {fileID: 434319024}
+    - target: {fileID: 24245960, guid: 051a676252156b348b546ae2cae9d05c, type: 3}
+      propertyPath: MainCamera
+      value: 
+      objectReference: {fileID: 534669904}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 051a676252156b348b546ae2cae9d05c, type: 3}
