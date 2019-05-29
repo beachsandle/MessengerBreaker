@@ -8,7 +8,7 @@ public class GameManager
     private static bool DataLoad()
     {
         instance = new GameManager();
-        instance.ballSpeed = 8f;
+        instance.ballSpeed = 7f;
         instance.barWidth = 2f;
         instance.divadeChance = 50f;
         instance.attack = 1;

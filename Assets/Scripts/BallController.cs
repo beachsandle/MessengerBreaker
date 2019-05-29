@@ -7,7 +7,7 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb2d;
     public float Speed=5f;
     public float Angle = 30f;
-    private float bentAngle = 0f;
+    private float? reflectAngle = null;
     public GameSceneController controller;
     void Start()
     {
@@ -17,15 +17,10 @@ public class BallController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (bentAngle != 0)
+        if (reflectAngle != null)
         {
-            var currentAngle = Vector2.Angle(Vector2.right, rb2d.velocity)+bentAngle;
-            bentAngle = 0f;
-            if (currentAngle < 15f)
-                currentAngle = 15f;
-            else if (currentAngle > 165f)
-                currentAngle = 165f;
-            rb2d.velocity = Quaternion.Euler(0, 0, currentAngle) * Vector2.right * Speed;
+            rb2d.velocity = Quaternion.Euler(0, 0, (float)reflectAngle) * Vector2.right * Speed;
+            reflectAngle = null;
         }
         if (rb2d.velocity.x == 0 || rb2d.velocity.y == 0)
             rb2d.velocity = Quaternion.Euler(0, 0, Angle) * Vector2.right * Speed*(rb2d.velocity.y<=0?1:-1);
@@ -33,19 +28,19 @@ public class BallController : MonoBehaviour
             rb2d.velocity = rb2d.velocity.normalized * Speed;
     }
 
-    private void SetBentAngle(Collision2D collision)
+    private void ContantToPlayer(Collision2D collision)
     {
-        
-        var xdist = (-transform.position.x+ collision.collider.bounds.center.x);
-        bentAngle = 30f*xdist / collision.collider.bounds.extents.x;
+
+        var collisionRatio = (collision.collider.bounds.center.x - transform.position.x)/ collision.collider.bounds.extents.x;
+        reflectAngle = 90+75f* collisionRatio;
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             if (transform.position.y < collision.collider.bounds.center.y)
                 return;
-            SetBentAngle(collision);
+            ContantToPlayer(collision);
         } else
         if (collision.gameObject.CompareTag("Bottom"))
         {
