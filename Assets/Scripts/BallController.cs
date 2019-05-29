@@ -22,7 +22,7 @@ public class BallController : MonoBehaviour
             rb2d.velocity = Quaternion.Euler(0, 0, (float)reflectAngle) * Vector2.right * Speed;
             reflectAngle = null;
         }
-        if (rb2d.velocity.x == 0 || rb2d.velocity.y == 0)
+        if (rb2d.velocity.y == 0)
             rb2d.velocity = Quaternion.Euler(0, 0, Angle) * Vector2.right * Speed*(rb2d.velocity.y<=0?1:-1);
         if (rb2d.velocity.magnitude <= Speed * 2 / 3)
             rb2d.velocity = rb2d.velocity.normalized * Speed;

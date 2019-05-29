@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager 
 {
@@ -106,5 +107,41 @@ public class GameManager
         }
     }
     private GameManager() { }
-   
+
+}
+public static class Extends
+{
+    public static IEnumerable<T> Meet<T>(this IEnumerable<T> collectoin, Predicate<T> condition)
+    {
+        foreach (var element in collectoin)
+            if (condition(element))
+                yield return element;
+    }
+    public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collectoin, Action<T> action)
+    {
+        foreach (var element in collectoin)
+        {
+            action(element);
+            yield return element;
+        }
+    }
+    public static int CountIf<T>(this IEnumerable<T> list, Predicate<T> condition)
+    {
+        int count = 0;
+        foreach (var element in list)
+            if (condition(element))
+                ++count;
+        return count;
+    }
+    public static List<T> Shuffle<T>(this List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            T temp = list[i];
+            int randomIndex = Random.Range(0, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+        return list;
+    }
 }
