@@ -12,7 +12,10 @@ public class ChangeScene : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Exit();
+        }
     }
 
     public void ChangeMenuScene()
