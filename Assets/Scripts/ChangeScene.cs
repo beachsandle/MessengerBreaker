@@ -7,15 +7,10 @@ public class ChangeScene : MonoBehaviour
 {
     void Start()
     {
-        
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Exit();
-        }
     }
 
     public void ChangeMenuScene()
@@ -31,16 +26,5 @@ public class ChangeScene : MonoBehaviour
     public void ChangeUpgradeScene()
     {
         SceneManager.LoadScene("UpgradeScene");
-    }
-
-    public void Exit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_WEBPLAYER
-        Application.OpenURL("https://github.com/beachsandle/MessengerBreaker");
-#else
-        Application.Quit();
-#endif
     }
 }
