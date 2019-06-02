@@ -17,16 +17,7 @@ public class PauseGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isPause = !isPause;
-
-            if (isPause)
-            {
-                OnPanel();
-            }
-            else
-            {
-                OffPanel();
-            }
+            OnPauseBtn();
         }
     }
 
@@ -50,5 +41,19 @@ public class PauseGame : MonoBehaviour
         }
 
         Time.timeScale = 1;
+    }
+
+    public void OnPauseBtn()
+    {
+        isPause = !isPause;
+
+        if (isPause)
+        {
+            OnPanel();
+        }
+        else
+        {
+            OffPanel();
+        }
     }
 }
