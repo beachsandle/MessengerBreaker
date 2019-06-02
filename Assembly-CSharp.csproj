@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\CheckExit.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameSceneController.cs" />
+    <Compile Include="Assets\Scripts\PauseGame.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/kirix/Desktop/MWS/MessengerBreaker/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
