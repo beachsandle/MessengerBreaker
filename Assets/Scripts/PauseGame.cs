@@ -11,7 +11,8 @@ public class PauseGame : MonoBehaviour
 
     void Start()
     {
-        OffPanel();
+        Debug.Log($"Start() in {this.name}");
+        if (this.name == "PauseButton") OffPanel();
     }
 
     void Update()
@@ -24,6 +25,8 @@ public class PauseGame : MonoBehaviour
 
     void OnPanel()
     {
+        Debug.Log($"OnPanel() in {this.name}");
+
         Time.timeScale = 0;
 
         if (panel != null)
@@ -33,8 +36,9 @@ public class PauseGame : MonoBehaviour
         }
     }
 
-    void OffPanel()
+    public void OffPanel()
     {
+        Debug.Log($"OffPanel() in {this.name}");
         if (panel != null)
         {
             panel.SetActive(false);
@@ -46,7 +50,11 @@ public class PauseGame : MonoBehaviour
 
     public void OnPauseBtn()
     {
+        if (panel.activeSelf != isPause) isPause = panel.activeSelf;
+
         isPause = !isPause;
+
+        Debug.Log($"OnPauseBtn(){isPause}  in {this.name}");
 
         if (isPause)
         {

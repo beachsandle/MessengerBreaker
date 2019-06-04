@@ -23,8 +23,8 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    public void ChangeUpgradeScene()
+    public void ChangeTutorialScene()
     {
-        SceneManager.LoadScene("UpgradeScene");
+        SceneManager.LoadScene("TutorialScene");
     }
 }
