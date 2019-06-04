@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 7536250117384884220}
   - component: {fileID: 1647165896739234288}
   - component: {fileID: 2924100729671255007}
-  - component: {fileID: 3914563041086614851}
+  - component: {fileID: 1335638124728047962}
   m_Layer: 5
   m_Name: NoButton
   m_TagString: Untagged
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3914563041086614851}
+      - m_Target: {fileID: 1335638124728047962}
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
@@ -350,7 +350,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &3914563041086614851
+--- !u!114 &1335638124728047962
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2250955714058632368
 RectTransform:
   m_ObjectHideFlags: 0
