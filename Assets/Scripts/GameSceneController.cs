@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public enum BLOCK_TYPE { KAKAO, LINE, FEBOOK, SLACK }
+public enum ITEM_TYPE { ATTACK, BALL, BAR, BOMB}
 
 public class GameSceneController : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameSceneController : MonoBehaviour
     private List<GameObject> balls = new List<GameObject>();
     private List<GameObject[]> blockLines = new List<GameObject[]>();
     private GameObject[] Blocks;
+    private GameObject[] Items;
     private GameObject blockContainner;
     private int lineCount;
     private int score = 0;
@@ -33,11 +35,14 @@ public class GameSceneController : MonoBehaviour
     //외부 변수
     public Text LevelText;
     public Text ScoreText;
+    public GameObject Player;
     public GameObject Ball;
     public GameObject KakaoBlock;
     public GameObject LineBlock;
     public GameObject FacebookBlock;
     public GameObject SlackBlock;
+    public GameObject AttackItem;
+    public GameObject BallItem;
     //
     //내부 속성
     //
@@ -45,6 +50,7 @@ public class GameSceneController : MonoBehaviour
     void Start()
     {
         Blocks = new GameObject[4] { KakaoBlock, LineBlock, FacebookBlock, SlackBlock };
+        Items = new GameObject[2] { AttackItem,BallItem };
         blockContainner = new GameObject();
         blockContainner.name = "blockContainner";
         lineCount = LEVEL_LENGTH;
@@ -56,6 +62,7 @@ public class GameSceneController : MonoBehaviour
     //
     //내부 함수
     private void SpanBall(float angle,Vector3? position= null)
+    //position에서 angle로 발사되는 공 생성
     {
         var ball = Instantiate(Ball, position ?? new Vector3(0, -2, 0), Quaternion.Euler(0, 0, 0));
         var controller = ball.GetComponent<BallController>();
@@ -75,6 +82,15 @@ public class GameSceneController : MonoBehaviour
         controller.controller = this;
         controller.bType = btype;
         blockLines[y][x] = block;
+    }
+    private void SpanItem(GameObject block,ITEM_TYPE itype)
+    //block 위치에 itype 아이템 생성
+    {
+        var spanPos = block.transform.position;
+        var item= Instantiate(Items[(int)itype], spanPos, Quaternion.Euler(0, 0, 0));
+        var controller = item.GetComponent<ItemController>();
+        controller.controller = this;
+        controller.iType = itype;
     }
     private IEnumerator CoPushBlockLine(GameObject[] line)
     //[coroutine]line을 FALLING_TIME에 걸쳐 BLOCK_SIZE만큼 하강
@@ -161,6 +177,8 @@ public class GameSceneController : MonoBehaviour
         {
             case BLOCK_TYPE.LINE:
                 RespanBlockLine();
+                if (Random.Range(0, 100) >= 50)
+                    SpanItem(blockController.gameObject, ITEM_TYPE.BALL);
                 break;
 
             case BLOCK_TYPE.FEBOOK:
@@ -168,15 +186,28 @@ public class GameSceneController : MonoBehaviour
                 break;
 
             case BLOCK_TYPE.SLACK:
-                if(Random.Range(0,100)>=50)
-                    GameManager.Attack++;
+                if (Random.Range(0, 100) >= 50)
+                    SpanItem(blockController.gameObject, ITEM_TYPE.ATTACK);
                 else
-                    SpanBall(Random.Range(15f, 175f));
+                    SpanItem(blockController.gameObject, ITEM_TYPE.BALL);
                 break;
         }
         ScoreText.text = $"Score : {score.ToString()}";
         blockLines.RemoveAll(line => line.CountIf(element => element != null) == 0);
         Destroy(blockController.gameObject);
+    }
+
+    public void PickupItem(ItemController controller)
+    {
+        switch (controller.iType)
+        {
+            case ITEM_TYPE.ATTACK:
+                ++GameManager.Attack;
+                break;
+            case ITEM_TYPE.BALL:
+                SpanBall(Random.Range(15f, 175f),Player.transform.position);
+                break;
+        }
     }
     //
 }
