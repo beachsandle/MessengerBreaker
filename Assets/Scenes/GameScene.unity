@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -280,8 +280,8 @@ GameObject:
   m_Component:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
-  - component: {fileID: 534669903}
   - component: {fileID: 534669906}
+  - component: {fileID: 534669903}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 534669902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb3ba02bb0b919468954c27dcf9872f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ecf0af68dc891040b91e1b8d49c5fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &542904956
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 542904961}
+      - m_Target: {fileID: 0}
         m_MethodName: OnPauseBtn
         m_Mode: 1
         m_Arguments:
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 542904956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55028665477130479b57bddda2f3b61, type: 3}
+  m_Script: {fileID: 11500000, guid: 95284235b6cc8e34196652301c0d0e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1164152094}
@@ -603,7 +603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1164152095
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1121,6 +1121,7 @@ GameObject:
   - component: {fileID: 1617099259}
   - component: {fileID: 1617099261}
   - component: {fileID: 1617099262}
+  - component: {fileID: 1617099263}
   m_Layer: 0
   m_Name: PlayerBar
   m_TagString: Player
@@ -1229,6 +1230,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barSpeed: 10
+--- !u!50 &1617099263
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617099258}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
 --- !u!1 &1736286147
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class BlockController : MonoBehaviour
 
     private void Start()
     {
-        HP = Level * (bType == BLOCK_TYPE.LINE ? 3 : bType == BLOCK_TYPE.SLACK ? 2 : 1);
+        HP = Level * (bType == BLOCK_TYPE.LINE ? 2 : 1);
         shell = (bType == BLOCK_TYPE.FEBOOK ? 2 : 0);
     }
 

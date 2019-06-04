@@ -20,7 +20,7 @@ public class GameSceneController : MonoBehaviour
     private readonly int COLUMNS = 8;
     private readonly int START_LINE = 3;
     private readonly int LINE_BLOCK_COUNT = 1;
-    private readonly int FEBOOK_BLOCK_COUNT = 2;
+    private readonly int FEBOOK_BLOCK_COUNT = 1;
     //
     //내부 변수
     private List<GameObject> balls = new List<GameObject>();
@@ -186,10 +186,7 @@ public class GameSceneController : MonoBehaviour
                 break;
 
             case BLOCK_TYPE.SLACK:
-                if (Random.Range(0, 100) >= 50)
-                    SpanItem(blockController.gameObject, ITEM_TYPE.ATTACK);
-                else
-                    SpanItem(blockController.gameObject, ITEM_TYPE.BALL);
+                SpanItem(blockController.gameObject, ITEM_TYPE.ATTACK);
                 break;
         }
         ScoreText.text = $"Score : {score.ToString()}";
