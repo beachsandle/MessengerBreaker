@@ -20,6 +20,7 @@ public class GameManager
     {
         return true;
     }
+
     private float ballSpeed;
     private float barWidth;
     private float divadeChance;
@@ -107,7 +108,6 @@ public class GameManager
         }
     }
     private GameManager() { }
-
 }
 public static class Extends
 {
