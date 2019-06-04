@@ -19,7 +19,7 @@ public class CheckExit : MonoBehaviour
         }
     }
 
-    void OnPanel()
+    public void OnPanel()
     {
         if (panel != null)
         {
