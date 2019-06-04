@@ -33,7 +33,6 @@ public class GameSceneController : MonoBehaviour
     //외부 변수
     public Text LevelText;
     public Text ScoreText;
-    public Camera MainCamera;
     public GameObject Ball;
     public GameObject KakaoBlock;
     public GameObject LineBlock;
@@ -45,7 +44,6 @@ public class GameSceneController : MonoBehaviour
     //behaviour
     void Start()
     {
-        MainCamera.orthographicSize = 3f / ((float)Screen.width / Screen.height);
         Blocks = new GameObject[4] { KakaoBlock, LineBlock, FacebookBlock, SlackBlock };
         blockContainner = new GameObject();
         blockContainner.name = "blockContainner";
