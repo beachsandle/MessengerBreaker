@@ -11,7 +11,7 @@ public class ItemController : MonoBehaviour
     {
         transform.position += Vector3.down * 3f * Time.deltaTime;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
