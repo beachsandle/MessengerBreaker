@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4408505948962360622}
   - component: {fileID: 4908030491814969799}
   - component: {fileID: 5520339832988426414}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: AttackItem
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2599062280882612856}
   - component: {fileID: 935029714146664347}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: "\u2014Pngtree\u2014pretty vector arrows_3122548"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8378808334748656373}
   - component: {fileID: 4391111516473321885}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
