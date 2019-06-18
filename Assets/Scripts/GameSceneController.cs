@@ -177,7 +177,7 @@ public class GameSceneController : MonoBehaviour
         {
             case BLOCK_TYPE.LINE:
                 RespanBlockLine();
-                if (Random.Range(0, 100) >= 50)
+                if (Random.Range(0, 100) >= 0)
                     SpanItem(blockController.gameObject, ITEM_TYPE.BALL);
                 break;
 
